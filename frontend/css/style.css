@@ -1,0 +1,60 @@
+body {
+      background-image: url('../images/note.jpeg');
+      background-repeat: no-repeat; 
+      background-attachment: fixed; 
+      background-position: center center; 
+      background-size: cover; 
+}
+
+
+.main, footer{
+      text-align: center;
+}
+
+
+.welcome{
+      margin-top: 5%;
+
+}
+
+div>h2 {
+      margin-bottom: 5%; 
+
+}
+
+h2 {
+      font-size: 40px; 
+}
+
+.welcome h1 {
+      font-size: 80px; 
+}
+
+#big{
+      width: 40%; 
+      height: 4px; 
+      margin: 5px auto;
+      background-color: black; 
+}
+
+#small{
+      width: 35%; 
+      height: 4px; 
+      margin: 5px auto;
+      background-color: black; 
+      margin-bottom: 1%;
+}
+
+
+#subheading {
+      font-size: 35px;
+}
+
+
+.footer{
+      margin-top: 200px;
+}
+
+.custom-btn {
+      width: 130px; 
+}

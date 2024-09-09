@@ -1,0 +1,53 @@
+.custom-container {
+    max-width: 500px;
+    padding: 25px;
+    background-color: rgb(255, 238, 190);
+    border-radius: 2%;
+}
+.navbar {
+    background-color: #ffe8b9; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.186); 
+  
+}
+
+
+.toggle-sidebar {
+    cursor: pointer;
+    font-size: 24px;
+    color: #000000;
+    display: none;
+    background-color: white;
+}
+
+.toggle-sidebar.active {
+    display: inline-block;
+    
+}
+
+.sidebar {
+    transition: transform 0.3s ease;
+    width: 280px;
+    background-color: #ffe3ab;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.286); /* Adjust the shadow values as needed */
+}
+
+.sidebar.collapsed {
+    transform: translateX(-100%);
+    
+}
+
+
+/*Sidebar toggle button to not be visible in big screen*/
+.toggle-sidebar-container {
+    display: none;
+}
+
+
+/*Sidebar toggle button will be visible on mobile screens. */
+@media (max-width: 767px) {
+    .toggle-sidebar-container {
+        display: block;
+        
+        
+    }
+}
