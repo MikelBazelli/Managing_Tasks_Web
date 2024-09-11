@@ -18,9 +18,10 @@ ManaWeb is a web application where users can register and manage tasks. Once reg
 
 
 
-
-
 ## After cloning the git repository, there is a file called " guidelines", There will be info about how to run 
+
+## NOTE
+In the Database all users that are registred have password of 12345
 
 
 ![image](https://github.com/user-attachments/assets/5f563cf0-a376-47ca-8df2-71dfb65f3891)
