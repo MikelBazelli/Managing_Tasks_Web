@@ -1,5 +1,5 @@
 body {
-      background-image: url('../images/note.jpeg');
+      background-image: url('../images/note.jpeg'); /* Adding image as a background*/
       background-repeat: no-repeat; 
       background-attachment: fixed; 
       background-position: center center; 
@@ -7,6 +7,7 @@ body {
 }
 
 
+/* Editing the <main>*/
 .main, footer{
       text-align: center;
 }
@@ -50,11 +51,16 @@ h2 {
       font-size: 35px;
 }
 
-
+/* Footer and Log in Button styling */
 .footer{
       margin-top: 200px;
 }
 
 .custom-btn {
       width: 130px; 
+      padding: 12px;
+      font-size: 19px;
+      font-weight: bold; 
+      box-shadow: 10px 4px 8px rgba(0, 0, 0, 0.407); 
+
 }

@@ -1,39 +1,48 @@
 import express from "express";
-import bcrypt from "bcrypt"; // Pw hashing
-import db from "../config/database.js";  // Importing the database connection
+import bcrypt from "bcrypt";// Pw hashing 
+import db from "../config/database.js";
+import { body, validationResult } from "express-validator"; //Validating inputs from the user
 
 const loginRouter = express.Router();
 
-// User Login Route
-loginRouter.post("/", async (req, res) => {
-  const { email, password } = req.body;
+// Validation middleware
+const loginValidation = [
+    body('email').isEmail().withMessage('Invalid Email Format'),
+    body('password').notEmpty().withMessage('Password is Required')
+];
 
-  const query = `SELECT * FROM users WHERE email = ?`;
-
-  db.query(query, [email], async (err, results) => {
-    if (err) {
-      return res.status(500).send('Error retrieving user');
+// Log in route
+loginRouter.post("/", loginValidation, async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
     }
 
-    if (results.length === 0) {
-      return res.status(404).send('User not found');
-    }
+    const { email, password } = req.body;
+    const query = `SELECT * FROM users WHERE email = ?`;
 
-    const user = results[0];
+    db.query(query, [email], async (err, results) => {
+        if (err) {
+            return res.status(500).send('Error retrieving user');
+        }
+        if (results.length === 0) {
+            return res.status(404).send('User not found');
+        }
+        const user = results[0];
 
-    // Comparing the provided password with the hashed one in the database
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-      return res.status(400).send('Incorrect password');
-    }
+        // Comparing pw with the hased pw from the database
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            return res.status(400).send('Incorrect password');
+        }
+       
+        // User name and id session
+        req.session.userId = user.id;
+        req.session.userName = user.name; 
 
-    // Storing the user ID in session
-    req.session.userId = user.id;
-    req.session.userName = user.name; // Optionally store the user's name
-
-    console.log(`User logged in: ${user.name}`);
-    res.send(`Login successful. Hey ${user.name}!`);
-  });
+        console.log(`User logged in: ${user.name}`);
+        res.send(`Login successful. Hey ${user.name}!`);
+    });
 });
 
 export default loginRouter;

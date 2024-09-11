@@ -3,7 +3,7 @@ import db from "../config/database.js";  // Importing the database connection
 
 const create = express.Router();
 
-// Middleware for authentication
+// Middleware for authentication, using id from the session
 create.use((req, res, next) => {
     if (!req.session.userId) {
         return res.status(401).send('Unauthorized: Please log in');
@@ -29,6 +29,5 @@ create.post("/", (req, res) => {
       res.status(201).send('Task created');
     });
 });
-
 
 export default create;

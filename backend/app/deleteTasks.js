@@ -3,7 +3,7 @@ import db from "../config/database.js";  // Importing the database connection
 
 const deleteTasks = express.Router();
 
-// Middleware to check if user is authenticated
+// Middleware to check if user is authenticated based on the id from the session
 deleteTasks.use((req, res, next) => {
     if (!req.session.userId) {
         return res.status(401).send('Unauthorized: Please log in');
@@ -27,10 +27,10 @@ deleteTasks.delete("/:id", (req, res) => {
 
         // Check if any rows were affected
         if (results.affectedRows === 0) {
-            return res.status(404).send('Task not found');
+            return res.status(404).send('Task not found or not authorized to delete');
         }
 
-        res.send('Task deleted');
+        res.status(200).send('Task deleted successfully');
     });
 });
 
